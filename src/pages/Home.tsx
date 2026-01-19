@@ -129,7 +129,7 @@ export default function Home() {
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Join leading organizations using Feonix to unlock the power of their data and accelerate growth.
           </p>
-          <Link to="/contact" className="inline-block px-8 py-4 bg-white text-primary-600 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+          <Link to="/contact" className="inline-block px-8 py-4 bg-gray-900 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors shadow-lg">
             Get Started Today
           </Link>
         </div>
