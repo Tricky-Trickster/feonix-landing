@@ -146,9 +146,14 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <a href="mailto:info@feonix.ai" className="text-primary-400 hover:text-primary-300">
-                      info@feonix.ai
-                    </a>
+                    <div className="space-y-1">
+                      <a href="mailto:info@feonix.ai" className="text-primary-400 hover:text-primary-300 block">
+                        info@feonix.ai
+                      </a>
+                      <a href="mailto:info@feonix.io" className="text-primary-400 hover:text-primary-300 block">
+                        info@feonix.io
+                      </a>
+                    </div>
                   </div>
                 </div>
 
