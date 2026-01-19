@@ -8,7 +8,7 @@ Complete guide for deploying the Feonix landing page to an Ubuntu VPS with HTTPS
 
 - Ubuntu VPS (20.04 or later)
 - Root or sudo access
-- Domain name (feonix.ai) with DNS pointing to your server IP
+- Domain name (feonix.io) with DNS pointing to your server IP
 - SSH access to your server
 
 ---
@@ -99,7 +99,7 @@ Paste this configuration:
 server {
     listen 80;
     listen [::]:80;
-    server_name feonix.ai www.feonix.ai;
+    server_name feonix.io www.feonix.io;
     
     root /var/www/feonix-landing/dist;
     index index.html;
@@ -151,10 +151,10 @@ sudo systemctl restart nginx
 sudo systemctl status nginx
 
 # Test from command line
-curl -I http://feonix.ai
+curl -I http://feonix.io
 ```
 
-Visit `http://feonix.ai` in your browser - you should see the landing page.
+Visit `http://feonix.io` in your browser - you should see the landing page.
 
 ---
 
@@ -168,8 +168,8 @@ Visit `http://feonix.ai` in your browser - you should see the landing page.
 ### 4.1 Verify DNS Resolution
 ```bash
 # Check if domain resolves to your server
-dig feonix.ai +short
-dig www.feonix.ai +short
+dig feonix.io +short
+dig www.feonix.io +short
 
 # Both should return your server's IP address
 ```
@@ -207,7 +207,7 @@ sudo systemctl reload nginx
 ### 4.5 Obtain SSL Certificate
 ```bash
 # Get certificate for both domains
-sudo certbot --nginx -d feonix.ai -d www.feonix.ai
+sudo certbot --nginx -d feonix.io -d www.feonix.io
 ```
 
 Follow the prompts:
@@ -225,13 +225,13 @@ Certbot will automatically:
 ### 4.6 Verify HTTPS
 ```bash
 # Test HTTPS
-curl -I https://feonix.ai
+curl -I https://feonix.io
 
 # Check certificate
 sudo certbot certificates
 ```
 
-Visit `https://feonix.ai` in your browser - you should see the secure padlock icon.
+Visit `https://feonix.io` in your browser - you should see the secure padlock icon.
 
 ### 4.7 Test Auto-Renewal
 ```bash
@@ -255,7 +255,7 @@ After Certbot runs, your config will look like this:
 server {
     listen 80;
     listen [::]:80;
-    server_name feonix.ai www.feonix.ai;
+    server_name feonix.io www.feonix.io;
     
     return 301 https://$server_name$request_uri;
 }
@@ -264,11 +264,11 @@ server {
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-    server_name feonix.ai www.feonix.ai;
+    server_name feonix.io www.feonix.io;
     
     # SSL certificates (managed by Certbot)
-    ssl_certificate /etc/letsencrypt/live/feonix.ai/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/feonix.ai/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/feonix.io/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/feonix.io/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
     
@@ -335,7 +335,7 @@ echo "🔄 Reloading Nginx..."
 sudo systemctl reload nginx
 
 echo "✅ Deployment complete!"
-echo "🌐 Visit: https://feonix.ai"
+echo "🌐 Visit: https://feonix.io"
 ```
 
 Make it executable:
@@ -373,17 +373,17 @@ sudo systemctl restart nginx
 ### Issue: Certbot Fails with 404
 ```bash
 # Ensure DNS points to your server
-dig feonix.ai +short
+dig feonix.io +short
 
 # Check Nginx is serving the site
-curl -I http://feonix.ai
+curl -I http://feonix.io
 
 # Verify ACME directory exists
 ls -la /var/www/feonix-landing/dist/.well-known/
 
 # Try standalone mode (stops Nginx temporarily)
 sudo systemctl stop nginx
-sudo certbot certonly --standalone -d feonix.ai -d www.feonix.ai
+sudo certbot certonly --standalone -d feonix.io -d www.feonix.io
 sudo systemctl start nginx
 ```
 
@@ -481,7 +481,7 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades
 ~/deploy-feonix.sh
 
 # Check site status
-curl -I https://feonix.ai
+curl -I https://feonix.io
 
 # View logs
 sudo tail -f /var/log/nginx/error.log
@@ -502,10 +502,12 @@ sudo certbot certificates
 
 Your site is now:
 - ✅ Deployed at `/var/www/feonix-landing`
-- ✅ Accessible via `https://feonix.ai` and `https://www.feonix.ai`
+- ✅ Accessible via `https://feonix.io` and `https://www.feonix.io`
 - ✅ HTTP automatically redirects to HTTPS
 - ✅ SSL certificate auto-renews every 90 days
 - ✅ Optimized with gzip compression and caching
 - ✅ Ready for production use
+
+**Note:** If you have feonix.ai forwarding to feonix.io, the SSL certificate is for feonix.io. The .ai domain will forward users to the secure .io site.
 
 **Support:** For issues, check the troubleshooting section or review logs.
