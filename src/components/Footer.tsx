@@ -44,7 +44,8 @@ export default function Footer() {
         </div>
         
         <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} Feonix. All rights reserved.</p>
+          <p>&copy; 2026 Feonix Technologies PTE. Ltd, Singapore. UEN: 202602748D</p>
+          <p className="mt-1 text-xs">All rights reserved.</p>
         </div>
       </div>
     </footer>
