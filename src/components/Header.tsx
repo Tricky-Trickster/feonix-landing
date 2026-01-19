@@ -24,12 +24,6 @@ export default function Header() {
               Contact
             </Link>
           </div>
-          
-          <div className="flex items-center space-x-4">
-            <a href="mailto:info@feonix.ai" className="btn-secondary text-sm">
-              Get Started
-            </a>
-          </div>
         </div>
       </nav>
     </header>
